@@ -1,18 +1,20 @@
 # Wakeshift plugins for coding agents
 
-[Wakeshift](https://wakeshift.ai) wakes your AI agent's conversation when something happens in an app it's connected to. This marketplace has Wakeshift's plugin for each agent that installs plugins with its own command. Each plugin adds the agent's hooks, and the hooks run Wakeshift's connector.
+[Wakeshift](https://wakeshift.ai) wakes your AI agent's conversation when something happens in an app it's connected to. This marketplace has Wakeshift's plugin for each agent that installs plugins with its own command, and for Cursor, which lists it in the Cursor Marketplace. Each plugin adds the agent's hooks, and the hooks run Wakeshift's connector.
 
 | Agent | Install | Update |
 | --- | --- | --- |
 | Claude Code | `claude plugin install wakeshift --marketplace wakeshift/agent-plugins --config issuer=https://app.wakeshift.ai` | `claude plugin marketplace update wakeshift && claude plugin update wakeshift@wakeshift` |
 | Codex | `codex plugin marketplace add wakeshift/agent-plugins && codex plugin add wakeshift@wakeshift` | `codex plugin marketplace upgrade wakeshift && codex plugin add wakeshift@wakeshift` |
 | GitHub Copilot CLI | `copilot plugin marketplace add wakeshift/agent-plugins && copilot plugin install wakeshift@wakeshift` | `copilot plugin update wakeshift` |
+| Cursor | From the Cursor Marketplace: open **Customize**, find **Wakeshift** and choose **Install** ([plugins/cursor](plugins/cursor)) | Cursor updates it once the Marketplace has reviewed the new version |
 
-You don't normally type these yourself. When your agent first needs a plugin, a Wakeshift app's tool result offers the command, and your agent asks you before it runs it. Then restart the agent:
+You don't normally type the Claude Code, Codex and Copilot CLI commands yourself. When your agent first needs a plugin, a Wakeshift app's tool result offers the command, and your agent asks you before it runs it. Then restart the agent:
 
 - **Claude Code** has nothing to approve, but loads a newly installed or updated plugin only when a session starts: type `/reload-plugins` (or restart with `claude --continue`).
 - **Codex** asks you to trust the plugin's hooks the first time it starts after an install or update. Choose "Trust all and continue".
 - **Copilot CLI** has nothing to approve.
+- **Cursor** has nothing to approve. Restart `cursor-agent`; the Cursor app loads the plugin by itself.
 
 [Agents](https://wakeshift.ai/docs/agents) says what each install changes.
 
@@ -48,8 +50,9 @@ Claude Code's plugin trusts the server in its `issuer` option instead (`--config
 - **Claude Code:** `claude plugin uninstall wakeshift@wakeshift`, then `/reload-plugins`
 - **Codex:** `codex plugin remove wakeshift@wakeshift`
 - **Copilot CLI:** `copilot plugin uninstall wakeshift`
+- **Cursor:** uninstall Wakeshift from **Customize**.
 
-Then `~/.wakeshift/bin/wakeshift uninstall --harness <claude-code|codex|copilot>` removes what the connector set up: the server it trusted and the conversations it connected.
+Then `~/.wakeshift/bin/wakeshift uninstall --harness <claude-code|codex|copilot|cursor>` removes what the connector set up: the server it trusted and the conversations it connected.
 
 ## Contributing and security
 

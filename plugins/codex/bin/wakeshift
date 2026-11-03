@@ -5,6 +5,10 @@
 #
 #   bin/wakeshift hook --harness <h> ...   make sure the connector is there, then run it
 #   bin/wakeshift prepare                  only make sure (a session-start hook)
+#   bin/wakeshift --issuer <origin> ...    the same, for the Wakeshift the user chose in
+#                                          the harness's own plugin settings (Claude Code's
+#                                          userConfig, which its hooks pass as an argument)
+#                                          rather than wakeshift.env's
 #
 # Making sure, which is all a warm run does (no network):
 #
@@ -56,6 +60,23 @@ fi
 case "$connector_version" in
 '' | none) say "this plugin pins no connector yet; update it"; exit 0 ;;
 esac
+
+# The Wakeshift the user chose, as the hook passes it. Only an argument the
+# plugin's own hooks write, never the environment (a project's settings can
+# set a hook's environment variables).
+if [ "${1:-}" = --issuer ]; then
+	v=${2:-}
+	v=${v%/}
+	case "$v" in
+	https://* | http://localhost | http://localhost:* | http://127.0.0.1 | http://127.0.0.1:*) ;;
+	*) say "the plugin's issuer setting isn't a Wakeshift's https address: ${v:-(empty)}"; exit 0 ;;
+	esac
+	case "${v#*://}" in
+	'' | *[!A-Za-z0-9.:-]*) say "the plugin's issuer setting isn't a Wakeshift's address (an origin, with no path): $v"; exit 0 ;;
+	esac
+	issuer=$v
+	shift 2
+fi
 
 prepare=
 if [ "${1:-}" = prepare ]; then prepare=1; fi

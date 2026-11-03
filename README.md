@@ -4,11 +4,13 @@
 
 | Agent | Install | Update |
 | --- | --- | --- |
+| Claude Code | `claude plugin install wakeshift --marketplace wakeshift/agent-plugins --config issuer=https://app.wakeshift.ai` | `claude plugin marketplace update wakeshift && claude plugin update wakeshift@wakeshift` |
 | Codex | `codex plugin marketplace add wakeshift/agent-plugins && codex plugin add wakeshift@wakeshift` | `codex plugin marketplace upgrade wakeshift && codex plugin add wakeshift@wakeshift` |
 | GitHub Copilot CLI | `copilot plugin marketplace add wakeshift/agent-plugins && copilot plugin install wakeshift@wakeshift` | `copilot plugin update wakeshift` |
 
 You don't normally type these yourself. When your agent first needs a plugin, a Wakeshift app's tool result offers the command, and your agent asks you before it runs it. Then restart the agent:
 
+- **Claude Code** has nothing to approve, but loads a newly installed or updated plugin only when a session starts: type `/reload-plugins` (or restart with `claude --continue`).
 - **Codex** asks you to trust the plugin's hooks the first time it starts after an install or update. Choose "Trust all and continue".
 - **Copilot CLI** has nothing to approve.
 
@@ -39,12 +41,15 @@ The `main` branch trusts production, `https://app.wakeshift.ai`. The `staging` b
 codex plugin marketplace add wakeshift/agent-plugins --ref staging
 ```
 
+Claude Code's plugin trusts the server in its `issuer` option instead (`--config issuer=<server>` when you install it, or `/plugin configure wakeshift@wakeshift`), so any branch works with any server; `wakeshift/agent-plugins#staging` is the staging branch.
+
 ## Uninstall
 
+- **Claude Code:** `claude plugin uninstall wakeshift@wakeshift`, then `/reload-plugins`
 - **Codex:** `codex plugin remove wakeshift@wakeshift`
 - **Copilot CLI:** `copilot plugin uninstall wakeshift`
 
-Then `~/.wakeshift/bin/wakeshift uninstall --harness <codex|copilot>` removes what the connector set up: the server it trusted and the conversations it connected.
+Then `~/.wakeshift/bin/wakeshift uninstall --harness <claude-code|codex|copilot>` removes what the connector set up: the server it trusted and the conversations it connected.
 
 ## Contributing and security
 

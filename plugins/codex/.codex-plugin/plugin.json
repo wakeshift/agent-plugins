@@ -1,6 +1,6 @@
 {
   "name": "wakeshift",
-  "version": "2026.11.02.2236+b09ad4f42359",
+  "version": "2026.11.02.2236+3e6590049f3c",
   "description": "Lets Wakeshift messages wake your Codex threads, for the apps you connect. Its hooks run Wakeshift's connector, ~/.wakeshift/bin/wakeshift, which it downloads and checks against the SHA-256 it carries.",
   "author": {
     "name": "Wakeshift",

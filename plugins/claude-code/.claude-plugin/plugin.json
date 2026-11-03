@@ -1,7 +1,7 @@
 {
   "name": "wakeshift",
   "displayName": "Wakeshift",
-  "version": "2026.11.03.1632+ebfcd583d51b",
+  "version": "2026.11.03.2218+9e9526c13d2f",
   "description": "Lets Wakeshift messages wake your Claude Code sessions, even while they're idle, for the apps you connect. Its hooks run Wakeshift's connector, ~/.wakeshift/bin/wakeshift, which it downloads and checks against the SHA-256 it carries.",
   "author": {
     "name": "Wakeshift",

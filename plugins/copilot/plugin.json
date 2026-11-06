@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "wakeshift",
-  "version": "2026.11.06.1920+e8960626e562",
+  "version": "2026.11.06.1929+f6482dffd5b3",
   "description": "Lets Wakeshift messages wake your GitHub Copilot CLI sessions, for the apps you connect. Its hooks run Wakeshift's connector, ~/.wakeshift/bin/wakeshift, which it downloads and checks against the SHA-256 it carries.",
   "author": {
     "name": "Wakeshift",

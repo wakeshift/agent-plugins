@@ -1,6 +1,6 @@
 {
   "name": "wakeshift",
-  "version": "2026.11.06.1737+f185f3818c09",
+  "version": "2026.11.06.1920+842f669d7325",
   "description": "Wakes your Cursor agent when the apps it watches through Wakeshift send something, so it can act on new messages without you checking in. Its hooks run Wakeshift's open-source connector, which the plugin downloads once and checks against the SHA-256 it carries.",
   "author": {
     "name": "Wakeshift",

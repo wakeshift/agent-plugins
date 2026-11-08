@@ -47,7 +47,17 @@
 # The connector is built for macOS and Linux (WSL included), on arm64 and
 # x86_64. Anywhere else (Windows' Git Bash, MSYS or Cygwin; the BSDs) the
 # launcher says so and does nothing.
+#
+# WAKESHIFT_DISABLED=1 (or true, in any case) in the harness's environment
+# turns every hook off: the launcher exits 0 before anything else, so no
+# download, no lock, no connector run, nothing on stdout or stderr, and a
+# conversation's link and a listener already running are left as they are.
+# The connector's own hook command checks it too (internal/connectcli).
 set -u
+
+case "${WAKESHIFT_DISABLED:-}" in
+1 | [Tt][Rr][Uu][Ee]) exit 0 ;;
+esac
 
 say() { printf 'wakeshift: %s\n' "$*" >&2; }
 

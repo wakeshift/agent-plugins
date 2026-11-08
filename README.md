@@ -4,7 +4,7 @@
 
 | Agent | Install | Update |
 | --- | --- | --- |
-| Claude Code | `claude plugin install wakeshift --marketplace wakeshift/agent-plugins --config issuer=https://app.wakeshift.ai` | `claude plugin marketplace update wakeshift && claude plugin update wakeshift@wakeshift` |
+| Claude Code | `claude plugin install wakeshift --marketplace wakeshift/agent-plugins` (before Claude Code 2.1.292: `claude plugin marketplace add wakeshift/agent-plugins && claude plugin install wakeshift@wakeshift`) | `claude plugin marketplace update wakeshift && claude plugin update wakeshift@wakeshift` |
 | Codex | `codex plugin marketplace add wakeshift/agent-plugins && codex plugin add wakeshift@wakeshift` | `codex plugin marketplace upgrade wakeshift && codex plugin add wakeshift@wakeshift` |
 | GitHub Copilot CLI | `copilot plugin marketplace add wakeshift/agent-plugins && copilot plugin install wakeshift@wakeshift` | `copilot plugin update wakeshift` |
 | Cursor | From the Cursor Marketplace: open **Customize**, find **Wakeshift** and choose **Install** ([plugins/cursor](plugins/cursor)) | Cursor updates it once the Marketplace has reviewed the new version |
@@ -16,7 +16,7 @@ You don't normally type the Claude Code, Codex and Copilot CLI commands yourself
 - **Copilot CLI** has nothing to approve.
 - **Cursor** has nothing to approve. Restart `cursor-agent`; the Cursor app loads the plugin by itself.
 
-[Agents](https://wakeshift.ai/docs/agents) says what each install changes.
+[Agents](https://wakeshift.ai/docs/agents) says what each install changes. Claude Code's plugin has its own [README](plugins/claude-code/README.md): what each hook does, every network request and where it goes, what it stores, and how to remove it all. The plugins run on macOS and Linux (WSL included), not native Windows.
 
 ## What a plugin does
 
@@ -43,7 +43,7 @@ The `main` branch trusts production, `https://app.wakeshift.ai`. The `staging` b
 codex plugin marketplace add wakeshift/agent-plugins --ref staging
 ```
 
-Claude Code's plugin trusts the server in its `issuer` option instead (`--config issuer=<server>` when you install it, or `/plugin configure wakeshift@wakeshift`), so any branch works with any server; `wakeshift/agent-plugins#staging` is the staging branch.
+For Claude Code, that's `wakeshift/agent-plugins#staging`. No plugin takes a server as a setting: each trusts its branch's server only, so a plugin that depends on Wakeshift's can't choose another.
 
 ## Uninstall
 

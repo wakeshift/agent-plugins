@@ -55,6 +55,8 @@ Messages are shown in the session and never written to disk.
 
 To pause it, disable the plugin: `claude plugin disable wakeshift@wakeshift`.
 
+To turn the hooks off for one run of Claude Code without changing the plugin, start it with `WAKESHIFT_DISABLED=1` (or `true`) in its environment: `WAKESHIFT_DISABLED=1 claude`. Every hook then exits at once and does nothing: no network request, no download, no output. Conversations that were connected keep their link, so their messages reach them again in a session started without the variable. A hook that was already running when you set it, such as a wait from an earlier session, carries on until it ends. Any other value, or none, leaves the hooks on.
+
 To remove everything, in this order (the plugin sets the connector up again on its next hook while it's installed):
 
 1. `claude plugin uninstall wakeshift@wakeshift`, then `/reload-plugins` in running sessions. `claude plugin marketplace remove wakeshift` also removes Wakeshift's marketplace (Claude Code clears the plugin's cached copy itself later).

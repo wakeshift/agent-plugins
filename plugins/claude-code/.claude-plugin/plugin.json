@@ -1,7 +1,7 @@
 {
   "name": "wakeshift",
   "displayName": "Wakeshift",
-  "version": "1.2.1",
+  "version": "1.3.0",
   "description": "Lets Wakeshift messages wake your Claude Code sessions, even while they're idle, for the apps you connect. Its hooks run Wakeshift's connector, ~/.wakeshift/bin/wakeshift, which the plugin downloads once from Wakeshift's GitHub releases and checks against the SHA-256 it carries; the connector talks only to Wakeshift (app.staging.wakeshift.ai), and only for conversations a Wakeshift app's tool connected. Disable or uninstall the plugin to turn it off.",
   "author": {
     "name": "Wakeshift",

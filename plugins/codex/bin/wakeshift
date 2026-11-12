@@ -70,6 +70,16 @@ if [ -n "${WAKESHIFT_HOME:-}${HOME:-}" ] && [ -e "${WAKESHIFT_HOME:-${HOME:-}/.w
 	exit 0
 fi
 
+# Redeem by call's hooks (Claude Code's PreToolUse claim and SubagentStart
+# mark) do nothing unless WAKESHIFT_REDEEM_BY_TOOL_CALL=1: exit before
+# anything else, as above, so with the flag off they cost the harness only
+# this shell's start.
+case " $* " in
+*" --event claim "* | *" --event subagent-context "*)
+	[ "${WAKESHIFT_REDEEM_BY_TOOL_CALL:-}" = 1 ] || exit 0
+	;;
+esac
+
 say() { printf 'wakeshift: %s\n' "$*" >&2; }
 
 case "$0" in

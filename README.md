@@ -40,7 +40,7 @@ Later runs only check that the connector is the pinned version or newer, so they
 The `main` branch trusts production, `https://app.wakeshift.ai`. The `staging` branch trusts Wakeshift's staging server, `https://app.staging.wakeshift.ai`:
 
 ```sh
-codex plugin marketplace add wakeshift/agent-plugins --ref staging
+codex plugin marketplace add wakeshift/agent-plugins@staging
 ```
 
 For Claude Code, that's `wakeshift/agent-plugins#staging`. No plugin takes a server as a setting: each trusts its branch's server only, so a plugin that depends on Wakeshift's can't choose another.

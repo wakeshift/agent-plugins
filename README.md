@@ -37,13 +37,9 @@ Later runs only check that the connector is the pinned version or newer, so they
 
 ## Other Wakeshift servers
 
-The `main` branch trusts production, `https://app.wakeshift.ai`. The `staging` branch trusts Wakeshift's staging server, `https://app.staging.wakeshift.ai`:
+These plugins trust Wakeshift's hosted server, `https://app.wakeshift.ai`. No plugin takes a server as a setting: each trusts one server only, so a plugin that depends on Wakeshift's can't choose another.
 
-```sh
-codex plugin marketplace add wakeshift/agent-plugins@staging
-```
-
-For Claude Code, that's `wakeshift/agent-plugins#staging`. No plugin takes a server as a setting: each trusts its branch's server only, so a plugin that depends on Wakeshift's can't choose another.
+Running your own server? Render a marketplace for it: see [wakeshift/server docs/self-hosting.md](https://github.com/wakeshift/server/blob/main/docs/self-hosting.md#the-connector-and-installs).
 
 ## Uninstall
 
